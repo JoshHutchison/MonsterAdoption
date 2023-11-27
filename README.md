@@ -1,71 +1,35 @@
-# project4
+# Monster Pet Adoption Platform with Three.js Integration
 
-# Pet Adoption Platform with Three.js Integration
-
-## Detailed README
-
-**Name**: Pet Adoption Platform with Three.js  
+**Name**: Monsters Pet Adoption Platform with Three.js  
 **Description**: This project is a web platform for pet adoption, integrating Three.js for immersive pet visualization. It connects animal shelters and rescues with potential adopters, facilitating the adoption process.  
 **Technologies Used**: React, Django, PostgreSQL, Three.js Fiber  
-**Social Links**: [Twitter](link/to/twitter), [Instagram](link/to/instagram), [LinkedIn](link/to/linkedin)
+**Social Links**: [github]([link/to/instagram](https://github.com/JoshHutchison)), [LinkedIn]([link/to/linkedin](https://www.linkedin.com/in/josh-g-hutchison/))
 
 # Full Entity Relationship Diagram (ERD) for the Backend
 
-![ERD Diagram](link/to/erd/diagram.png)
+![Screenshot 2023-11-27 at 1 48 36 AM](https://github.com/JoshHutchison/project4/assets/47956394/adad9ac9-879c-4bb3-a378-ec8ba6062ab0)
+
 
 # Component Hierarchy Diagram (Lucidchart or Other) for the Frontend
 
-![Component Hierarchy](link/to/component/hierarchy.png)
+![Screenshot 2023-11-27 at 1 55 56 AM](https://github.com/JoshHutchison/project4/assets/47956394/9ee011d4-aff6-45a4-9cfe-bbb9c0d0b4af)
+
 
 # Wireframed Designs for Your Front End
 
-![Wireframe Designs](link/to/wireframe/designs.png)
+![Screenshot 2023-11-27 at 2 07 01 AM](https://github.com/JoshHutchison/project4/assets/47956394/edfaca8e-5c54-42e2-afbd-9caac0d17959)
+
 
 # Trello Board
 
-[Trello Board Link](link/to/trello/board)
+[Trello Board Link](https://trello.com/b/tMob462h/pet-adoption)
 
 # Project Scope
 
 The project aims to create a comprehensive pet adoption platform with an immersive experience using Three.js for pet visualization. Users can browse, search, and adopt pets from various shelters and rescues. It will include user authentication, pet listings with 3D visualization, adoption application submission, and management tools for shelters.
 
-# Project Requirements (MVP)
 
-- Create a new repository for the project.
-- Develop a detailed and professional README.md using markdown.
-- Include links to socials, project description, technologies used, getting started section, screenshots, future updates, and credits.
-- Implement at least 3 models with relationships.
-- Design and build at least 5 components.
-- Implement full CRUD operations (POST, GET, PUT, DELETE) on at least one model.
-- Utilize functional components with React hooks.
-- Use media queries for responsive styles with at least one breakpoint.
-- Integrate Three.js for immersive pet visualization.
-- Ensure a minimum of 60 meaningful git commits.
-- Maintain proper code formatting without commented-out code.
+# Stretch Goals
 
-# Getting Started
-
-To run the project locally:
-
-1. Clone this repository.
-2. Navigate to the project directory.
-3. Install dependencies: `npm install` for frontend and `pip install -r requirements.txt` for backend.
-4. Start the frontend and backend servers.
-5. Visit [Deployed Site](link/to/deployed/site) for the live version.
-6. Access the [Trello Board](link/to/trello/board) for project tracking and progress.
-
-# Screenshots
-
-![Screenshot 1](link/to/screenshot/1.png)
-![Screenshot 2](link/to/screenshot/2.png)
-
-# Future Updates
-
-- Implement advanced search filters for pets.
-- Introduce real-time notifications for application status updates.
-- Enhance user profiles with saved pet lists and application history.
-
-# Credits
-
-- Contributors: [Developer 1](link/to/developer/1), [Developer 2](link/to/developer/2)
-- Third-party Libraries: [Library Name](link/to/library)
+- more animations
+- Person creator so you can see the size difference between you and the pet
