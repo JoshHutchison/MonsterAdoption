@@ -7,17 +7,17 @@
 **Technologies Used**: React, Django, PostgreSQL, Three.js Fiber  
 **Social Links**: [github]([link/to/instagram](https://github.com/JoshHutchison)), [LinkedIn]([link/to/linkedin](https://www.linkedin.com/in/josh-g-hutchison/))
 
-# Full Entity Relationship Diagram (ERD) for the Backend
+# Full Entity Relationship Diagram (ERD)
 
 ![Screenshot 2023-11-27 at 1 48 36 AM](https://github.com/JoshHutchison/project4/assets/47956394/adad9ac9-879c-4bb3-a378-ec8ba6062ab0)
 
 
-# Component Hierarchy Diagram (Lucidchart or Other) for the Frontend
+# Component Hierarchy Diagram
 
 ![Screenshot 2023-11-27 at 1 55 56 AM](https://github.com/JoshHutchison/project4/assets/47956394/9ee011d4-aff6-45a4-9cfe-bbb9c0d0b4af)
 
 
-# Wireframed Designs for Your Front End
+# Wireframes
 
 ![Screenshot 2023-11-27 at 2 07 01 AM](https://github.com/JoshHutchison/project4/assets/47956394/edfaca8e-5c54-42e2-afbd-9caac0d17959)
 
