@@ -1,5 +1,7 @@
 # Monster Pet Adoption Platform with Three.js Integration
 
+![Screenshot 2023-11-27 at 2 14 59 AM](https://github.com/JoshHutchison/project4/assets/47956394/550d7fd2-ba92-469c-b5b9-2006a754634e)
+
 **Name**: Monsters Pet Adoption Platform with Three.js  
 **Description**: This project is a web platform for pet adoption, integrating Three.js for immersive pet visualization. It connects animal shelters and rescues with potential adopters, facilitating the adoption process.  
 **Technologies Used**: React, Django, PostgreSQL, Three.js Fiber  
