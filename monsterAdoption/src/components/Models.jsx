@@ -1,8 +1,12 @@
 import { useAnimations, useGLTF } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
+import { applyProps, useFrame, useLoader } from "@react-three/fiber";
 import { useControls} from 'leva'
-import { useEffect } from "react";
-import { FogExp2 } from "three";
+import { useEffect, useRef } from "react";
+
+import * as THREE from 'three'
+
+import earthImg from '../assets/earth.jpg'
+import moonImg from '../assets/moon.png'
 
 export function Wolf(props) {
     const wolf = useGLTF('./wolf.gltf')
@@ -68,6 +72,17 @@ export function BuffaloMan(props) {
         animationName: {options: animations.names}
     })
 
+    applyProps(buffalo_man.materials['EYES.001'], {color:'white'})
+    applyProps(buffalo_man.materials['Game_dragon.002'], {color:'#333'})
+    applyProps(buffalo_man.materials['Game_dragon.003'], {color:'red'})
+    console.log('buffalo', buffalo_man);
+
+    // const existingMesh = buffalo_man.materials['Game_dragon.002'];
+    // const targetNode = buffalo_man.nodes.breast; // Replace 'your_target_node_name' with the specific node's name
+    // console.log('targetNode',targetNode);
+    // // Assign the existing mesh to the target node
+    // targetNode.add(existingMesh);
+
     useEffect(() => {
         const action = animations.actions[animationName]
 
@@ -128,7 +143,7 @@ export function WolfReal(props) {
         const zOld = model.scene.position.z
 
         // Calculate X and Z coordinates for circular motion
-        const radius = 6; // Adjust the radius of the circle
+        const radius = 4; // Adjust the radius of the circle
         const x = Math.cos(angle) * radius;
         const z = Math.sin(angle) * radius;
 
@@ -268,4 +283,37 @@ export function TwoHeadedWolf(props) {
     }, [animationName])
     return <primitive object={model.scene} {...props}/>
 }
+
+export function Earth(props) {
+  
+    const ref = useRef()
+    const [texture, moon] = useLoader(THREE.TextureLoader, [earthImg, moonImg])
+
+
+
+    useFrame((state, delta) => {
+        ref.current.rotation.y += delta * 0.2
+    })
+
+    
+    return (
+        <group ref={ref} scale={1} position={[0, 0, -20]}>
+          <mesh>
+            <sphereGeometry args={[5, 32, 32]} />
+            <meshStandardMaterial map={texture} roughness={1} fog={false} />
+          </mesh>
+          <mesh position={[5, 2, -8]}>
+            <sphereGeometry args={[0.75, 32, 32]} />
+            <meshStandardMaterial roughness={1} map={moon} fog={false} />
+          </mesh>
+          <pointLight position={[-5, -5, -5]} distance={1000} intensity={6} />
+          {/* <mesh position={[-30, -10, -60]}>
+            <sphereGeometry args={[4, 32, 32]} />
+            <meshBasicMaterial color="#FFFF99" fog={false} />
+            <pointLight distance={6100} intensity={50} color="white" />
+          </mesh> */}
+        </group>
+      )
+}
+
 

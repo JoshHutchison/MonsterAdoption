@@ -9,12 +9,12 @@ export default function Model2 () {
     console.log(elf);
     const animations = useAnimations(elf.animations, elf.scene)
     
-    const scroll = useScroll()     
+    // const scroll = useScroll()     
 
-    useFrame(() => {
-        setPos(scroll.range(0, 1))
-        // console.log(pos)
-    })
+    // useFrame(() => {
+    //     setPos(scroll.range(0, 1))
+    //     // console.log(pos)
+    // })
 
 
     const { animationName } = useControls('elf',{
@@ -42,7 +42,7 @@ export default function Model2 () {
     <primitive  
         object={elf.scene}
         scale={3}
-        position={[2,0,1]}
+        position={[0,0,0]}
         rotation={[0,0,0]}/>
         </>
     )
