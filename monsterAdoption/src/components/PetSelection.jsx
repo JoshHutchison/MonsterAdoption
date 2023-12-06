@@ -1,96 +1,123 @@
 import { Canvas } from "@react-three/fiber";
-import {
-  Wolf,
-  ElfWolf,
-  BuffaloMan,
-  Man,
-  WolfReal,
-  Spider,
-  Raptor,
-  Warrior,
-  TwoHeadedWolf,
-  Earth,
-} from "./Models";
-import Model2 from "./Model2";
 import useRefs from "react-use-refs";
+import { useState, useEffect, useRef } from "react";
+
 import {
   View,
   Preload,
   OrbitControls,
   Environment,
   PerspectiveCamera,
+
 } from "@react-three/drei";
+import { Perf } from "r3f-perf";
+import * as Models from './Models'; 
+import axios from "axios"
+import { ModelComponent } from "./ModelComponent";
+
+
+
+
+
+  const listExportedFunctions = (module) => {
+    const functionNames = [];
+  
+    for (const key in module) {
+      if (Object.prototype.hasOwnProperty.call(module, key)) {
+        if (typeof module[key] === 'function') {
+          functionNames.push(key);
+        }
+      }
+    }
+  
+    return functionNames;
+  }  
+  
+const exportedFunctionNames = listExportedFunctions(Models);
+console.log('Exported function names:', exportedFunctionNames);
+
+
 
 export default function PetSelection() {
-  const [ref, view1, view2, view3, view4, view5, view6] = useRefs();
-  return (
-    <div ref={ref} className="container">
-      <div className="text">
-        <div className="card">          
-          <h4>pet Name</h4>
-          <div ref={view1} className="view translateX" />
-        </div>
-        <div className="card">
-        <h4>pet Name</h4>
-          <div ref={view2} className="view scale" />
-        </div>
-        <div className="card">
-        <h4>pet Name</h4>
-          <div ref={view3} className="view translateY" />
-        </div>
-        <div className="card">
-        <h4>pet Name</h4>
-          <div ref={view4} className="view scale" />
-        </div>
-        <div className="card">
-        <h4>pet Name</h4>
-          <div ref={view5} className="view translateX" />
-        </div>
-        <div className="card">
-        <h4>pet Name</h4>
-          <div ref={view6} className="view translateX" />
-        </div>
-      </div>
-      <Canvas eventSource={ref} className="canvas" shadows={true}>
-        <View track={view1}>
-          <Common color="lightblue" />
-          <Model2></Model2>
-          <OrbitControls makeDefault />
-        </View>
-        <View track={view2}>
-          <Common color="lightblue" />
-          <Wolf position={[0, 0, 0]} rotation={[0, 0.5, 0]} />
-          <OrbitControls makeDefault />
-        </View>
-        <View track={view3}>
-          <Common color="lightblue" />
+  const [pets, setPets] = useState([]);
+  const canvasRef = useRef(null);
+  let refsArr = []
+    for (let index = 0; index < 20; index++) {
+      if (refsArr != [] ) {
+        refsArr.push(useRef())
+      }
+      
+      
+    }
+  console.log('refsarr',refsArr)
+  // const viewRefs = useRefs(2);
+  console.log('pets', pets.length);
+  // const [ref, view1, view2, view3, view4, view5, view6,view7, view8, view9, view10, view11, view12] = useRefs();
 
-          <ElfWolf scale={3} position={[0, -1, 0]} rotation={[0, 0.5, 0]} />
-          <OrbitControls makeDefault />
-        </View>
-        <View track={view4}>
-          <Common color="lightblue" />
-          <BuffaloMan scale={0.05} position={[0, -2, 0]} rotation={[0, 0, 0]} />
-          <OrbitControls makeDefault />
-        </View>
-        <View track={view5}>
-          <Common color="lightblue" />
-          <WolfReal scale={2} position={[0, 0, 0]} rotation={[0, 0, 0]} />
-          <OrbitControls makeDefault />
-        </View>
-        <View track={view6}>
-          <Common color="lightblue" />
-          <TwoHeadedWolf
-            scale={0.01}
-            position={[0, 0, 0]}
-            rotation={[0, 0, 0]}
-          />
-          <OrbitControls makeDefault />
-        </View>
-        <Preload all />
+  useEffect(() => {
+    const getPets = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8000/pets/`);
+        console.log(response);
+        setPets(response.data);
+      } catch (error) {
+        console.error("Error fetching pets:", error);
+      }
+    };
+    getPets();
+    
+  }, []);
+
+
+    // // Populate refsArr with refs based on pets length
+    // if (pets.length > 0) {
+    //   for (let index = 0; index < pets.length; index++) {
+    //     refsArr.push(useRef());
+    //   }
+    // }
+
+
+  return (
+    <div>
+    {pets.length !== 0 ? (<div ref={canvasRef} className="container">
+    <div className="text">
+      {pets.map((pet, index) => (
+        
+          <div key={index} className="card">
+            <h4>{pet.name}</h4>
+            <div ref={refsArr[index]} className="view translateX" />
+          </div>
+      
+        
+      ))}
+      </div>
+      {/* <div className="card">          
+          <h4>pet Name</h4>
+          <div ref={refsArr[1]} className="view translateX" />
+        </div> */}
+      <Canvas ref={canvasRef} className="canvas" shadows={true}>
+      {/* <OrbitControls makeDefault /> */}
+        {/* <Perf position="bottom-right" /> */}
+        {pets.map((pet, index) => (
+          <View key={index} track={refsArr[index]}>
+            <Common color="lightblue" />
+            <ModelComponent
+              scale={pet.model_state.scale} 
+              position={pet.model_state.position} 
+              rotation={pet.model_state.rotation}
+              filePath={pet.model_filename}
+            />
+            <OrbitControls makeDefault />
+          </View>
+  ))}
+        {/* <Preload all /> */}
       </Canvas>
+    </div>): (
+        // Render when pets array is empty
+        <div>No pets available.</div>
+      )}
     </div>
-  );
+  )
 }
 
 const Common = ({ color }) => (

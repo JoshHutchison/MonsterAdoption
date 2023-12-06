@@ -8,6 +8,62 @@ import * as THREE from 'three'
 import earthImg from '../assets/earth.jpg'
 import moonImg from '../assets/moon.png'
 
+export function Elf(props) {
+    const model = useGLTF('./elf.gltf')
+    const animations = useAnimations(model.animations, model.scene)
+    
+    console.log('Elf', model);
+
+    const { animationName } = useControls('Elf',{
+        animationName: {options: animations.names}
+    })    
+
+    useEffect(() => {        
+        
+        const action = animations.actions[animationName]
+
+        action
+            .reset()
+            .fadeIn(0.5)
+            .play()
+
+        return () => {
+            action.fadeOut(0.5)
+           
+        }
+    }, [animationName])
+    return <primitive object={model.scene} {...props}/>
+}
+
+
+export function Fox (props) {    
+    const model = useGLTF('./Fox.glb')
+    
+    const animations = useAnimations(model.animations, model.scene)    
+
+    const { animationName } = useControls('fox',{
+        animationName: {options: animations.names}
+    })
+
+    useEffect(() => {
+        const action = animations.actions[animationName]
+
+        action
+            .reset()
+            .fadeIn(0.5)
+            .play()
+
+        return () => {
+            action.fadeOut(0.5)
+           
+        }
+    }, [animationName])
+
+    return (<primitive object={model.scene} {...props}/>
+    
+    )
+}
+
 export function Wolf(props) {
     const wolf = useGLTF('./wolf.gltf')
     const animations = useAnimations(wolf.animations, wolf.scene)
@@ -261,7 +317,7 @@ export function TwoHeadedWolf(props) {
     
     console.log('mech', model);
 
-    const { animationName } = useControls('Mech',{
+    const { animationName } = useControls('TwoHeadedWolf',{
         animationName: {options: animations.names}
     })
     
