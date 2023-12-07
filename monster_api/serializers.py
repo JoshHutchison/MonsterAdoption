@@ -10,7 +10,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        fields = ('user_name', 'email', 'password', 'role', 'applications')
+        fields = ('id','user_name', 'email', 'password', 'role', 'applications')
 
 class ShelterSerializer(serializers.HyperlinkedModelSerializer):
     pets = serializers.PrimaryKeyRelatedField(
@@ -32,14 +32,19 @@ class PetSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id','name', 'species', 'breed', 'age', 'description', 'adoption_status', 'model_filename', 'model_state', 'shelter')
 
 class AdoptionApplicationSerializer(serializers.HyperlinkedModelSerializer):
-    user = UserSerializer(
-        read_only=True
-    )
+    user_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+    pet_id = serializers.PrimaryKeyRelatedField(queryset=Pet.objects.all())
 
-    pet = PetSerializer(
-        read_only=True
-    )
+
+    # user = UserSerializer(
+    #     many=True,
+    #     write_only=True
+    # )
+    # pet = PetSerializer(
+    #     many=True,
+    #     write_only=True
+    # )
 
     class Meta:
         model = AdoptionApplication
-        fields = ('id', 'user', 'pet', 'application_status', 'application_details')
+        fields = ('id', 'user_id', 'pet_id', 'application_status', 'application_details', 'applicant_name', 'applicant_address', 'applicant_phone_number', 'applicant_adoption_reason')

@@ -46,6 +46,12 @@ class AdoptionApplication(models.Model):
     pet_id = models.ForeignKey(Pet, on_delete=models.CASCADE, related_name='applications')    
     application_status = models.CharField(max_length=100)
     application_details = models.CharField(max_length=100)
+    
+    applicant_name = models.CharField(max_length=100, blank=True, null=True)
+    applicant_address = models.CharField(max_length=100, blank=True, null=True)
+    applicant_phone_number = models.CharField(max_length=100, blank=True, null=True)
+    applicant_adoption_reason = models.TextField(blank=True, null=True)
+
 
     def __str__(self):
         return str(self.id)

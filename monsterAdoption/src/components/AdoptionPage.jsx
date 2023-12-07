@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import useRefs from "react-use-refs";
 import { Canvas } from "@react-three/fiber";
 import {
@@ -23,6 +23,8 @@ const AdoptionPage = () => {
   const [pet, setPet] = useState(null);
 
   const [ref, view] = useRefs();
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchPetDetails = async () => {
@@ -56,18 +58,38 @@ const AdoptionPage = () => {
     setReason(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // You can perform any actions here with the submitted data
-    console.log('Submitted Data:', { name, address, phoneNumber, reason });
-    // For example, you might want to send this data to an API or perform other operations.
-  };
+  
+    try {
+      const response = await axios.post('http://localhost:8000/adoption-applications/', {
+        user_id: 3, // Replace userId with the actual user ID from your application
+        pet_id: id, // Assuming id is the pet's ID
+        application_status: 'Pending', // Set initial status as 'Pending' or change it as needed
+        application_details: 'New application', // Provide any details if needed
+        
+        applicant_name: name,
+        applicant_address: address,
+        applicant_phone_number: phoneNumber,
+        applicant_adoption_reason: reason,
+      });
+  
+      console.log('Server response:', response.data);
+      navigate('/AdoptionApplications');
+  
+      // Perform any additional actions after successful submission
+      // For example, show a success message, reset form fields, redirect, etc.
+    } catch (error) {
+      console.error('Error submitting data:', error);
+      // Handle errors, show error message to the user, etc.
+    }
+  }
 
   return (
     <div ref={ref} className="container">
         {pet ? (
       <div className="card adoption-form">
-        <h2>Adoption Form</h2>
+        <h2 className="adoption-header">Adoption Form</h2>
         <h3>{pet.name}</h3>
         <div ref={view} className="view" />
 
@@ -135,7 +157,7 @@ const AdoptionPage = () => {
         <p>Loading...</p>
       )}
       {/* Rest of your PetPage content */}
-      <Link to="/pet-page">Go Back</Link>
+      <Link to="/PetSelection">Go Back</Link>
     </div>
   );
 };

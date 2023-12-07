@@ -36,7 +36,7 @@ export default function PetSelection() {
   const [pets, setPets] = useState([]);
   const canvasRef = useRef(null);
   let refsArr = [];
-  for (let index = 0; index < 20; index++) {
+  for (let index = 0; index < 30; index++) {
     if (refsArr != []) {
       refsArr.push(useRef());
     }

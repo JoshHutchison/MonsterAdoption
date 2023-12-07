@@ -25,8 +25,8 @@ export default function DragonEarth(props) {
         setRotation({x: 0, y: (Math.PI* 4 * scroll_range) , z:0 })
         // setPosition({x: 0, y: 10*(0.7-scroll_range), z:0})
 
-        if (scroll_range > 0.5) {
-            setPosition({x: 0, y: 100*(scroll_range-.5), z:0})
+        if (scroll_range > 0.3) {
+            setPosition({x: 0, y: 100*(scroll_range-.3), z:0})
             console.log(scroll_range)
         } else {
             setPosition({x: 0, y: 0, z:0})         

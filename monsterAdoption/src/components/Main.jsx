@@ -5,6 +5,7 @@ import Nav from "./Nav";
 import { Route, Routes } from 'react-router-dom'
 import PetPage from "./PetPage";
 import PetSelection from "./PetSelection";
+import AdoptionApplications from "./AdoptionApplications";
 import AdoptionPage from "./AdoptionPage";
 
 export default function Main () {
@@ -16,6 +17,7 @@ export default function Main () {
                 <Route path='/PetSelection' element={<PetSelection/>}></Route>
                 <Route path='/PetPage/:id' element={<PetPage/>}></Route>
                 <Route path='/Adoption/:id' element={<AdoptionPage/>}></Route>
+                <Route path='/AdoptionApplications' element={<AdoptionApplications/>}></Route>
 
             </Routes>
 
