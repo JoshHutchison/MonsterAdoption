@@ -122,11 +122,12 @@ export function ElfWolf(props) {
 export function BuffaloMan(props) {
     const buffalo_man = useGLTF('./Dragon_Baked_Actions2.glb')
     const animations = useAnimations(buffalo_man.animations, buffalo_man.scene)
-    console.log('buffalo', buffalo_man);
+    console.log('buffalo', animations);
 
-    const { animationName } = useControls('dragon',{
-        animationName: {options: animations.names}
-    })
+
+    // const { animationName } = useControls('dragon',{
+    //     animationName: {options: animations.names}
+    // })
 
     applyProps(buffalo_man.materials['EYES.001'], {color:'white'})
     applyProps(buffalo_man.materials['Game_dragon.002'], {color:'#333'})
@@ -140,7 +141,7 @@ export function BuffaloMan(props) {
     // targetNode.add(existingMesh);
 
     useEffect(() => {
-        const action = animations.actions[animationName]
+        const action = animations.actions[animations.names[0]]
 
         action
             .reset()
@@ -151,7 +152,7 @@ export function BuffaloMan(props) {
             action.fadeOut(0.5)
            
         }
-    }, [animationName])
+    }, [])
     return <primitive object={buffalo_man.scene} {...props}/>
 }
 

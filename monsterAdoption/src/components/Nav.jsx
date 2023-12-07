@@ -16,9 +16,11 @@ export default function Nav () {
           <Link className="nav-item" to='PetSelection'>
             PetSelection
           </Link>
-          <Link className="nav-item" to='PetPage'>
-           PetPage
+          <Link className="nav-item" to='AdoptionApplications'>
+            Adoption Applications
           </Link>
+
+          
         </div>
       </div>
     );

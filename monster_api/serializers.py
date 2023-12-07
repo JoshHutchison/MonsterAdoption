@@ -29,7 +29,7 @@ class PetSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Pet
-        fields = ('name', 'species', 'breed', 'age', 'description', 'adoption_status', 'model_filename', 'model_state', 'shelter')
+        fields = ('id','name', 'species', 'breed', 'age', 'description', 'adoption_status', 'model_filename', 'model_state', 'shelter')
 
 class AdoptionApplicationSerializer(serializers.HyperlinkedModelSerializer):
     user = UserSerializer(

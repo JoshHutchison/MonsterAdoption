@@ -11,13 +11,27 @@ export default function DragonEarth(props) {
         y:0,
         z:0
     })
+    const [ position, setPosition ] = useState({
+        x:0,
+        y:0,
+        z:0
+    })
 
     const scroll = useScroll()   
     
     useFrame((state, delta) => {
         const scroll_range = scroll.range(0, 1)
-        console.log(state)
-        setRotation({x: 0, y: (Math.PI/.5 * scroll_range) , z:0 })
+        // console.log(state)
+        setRotation({x: 0, y: (Math.PI* 4 * scroll_range) , z:0 })
+        // setPosition({x: 0, y: 10*(0.7-scroll_range), z:0})
+
+        if (scroll_range > 0.5) {
+            setPosition({x: 0, y: 100*(scroll_range-.5), z:0})
+            console.log(scroll_range)
+        } else {
+            setPosition({x: 0, y: 0, z:0})         
+            console.log(scroll_range)
+        }
         // console.log(Math.PI/2);
         // state.camera.position({x:-1, y: 30 - (scroll_range * 28) , z: 12})
         // state.camera.position.y = 30 - (scroll_range * 28)
@@ -26,7 +40,10 @@ export default function DragonEarth(props) {
     })  
     
     
-    return <group rotation={[rotation.x, rotation.y, rotation.z]}>
+    return <group 
+            rotation={[rotation.x, rotation.y, rotation.z]} 
+            position={[position.x,position.y,position.z]}
+            scale={.7}>
         <BuffaloMan scale={0.1} position={[0, -4, 0]} rotation={[0, 0, 0]} />
         <Earth />
         </group>

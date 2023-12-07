@@ -8,50 +8,42 @@ import {
   OrbitControls,
   Environment,
   PerspectiveCamera,
-
 } from "@react-three/drei";
 import { Perf } from "r3f-perf";
-import * as Models from './Models'; 
-import axios from "axios"
+import * as Models from "./Models";
+import axios from "axios";
 import { ModelComponent } from "./ModelComponent";
+import { Link } from "react-router-dom";
 
+const listExportedFunctions = (module) => {
+  const functionNames = [];
 
-
-
-
-  const listExportedFunctions = (module) => {
-    const functionNames = [];
-  
-    for (const key in module) {
-      if (Object.prototype.hasOwnProperty.call(module, key)) {
-        if (typeof module[key] === 'function') {
-          functionNames.push(key);
-        }
+  for (const key in module) {
+    if (Object.prototype.hasOwnProperty.call(module, key)) {
+      if (typeof module[key] === "function") {
+        functionNames.push(key);
       }
     }
-  
-    return functionNames;
-  }  
-  
+  }
+
+  return functionNames;
+};
+
 const exportedFunctionNames = listExportedFunctions(Models);
-console.log('Exported function names:', exportedFunctionNames);
-
-
+console.log("Exported function names:", exportedFunctionNames);
 
 export default function PetSelection() {
   const [pets, setPets] = useState([]);
   const canvasRef = useRef(null);
-  let refsArr = []
-    for (let index = 0; index < 20; index++) {
-      if (refsArr != [] ) {
-        refsArr.push(useRef())
-      }
-      
-      
+  let refsArr = [];
+  for (let index = 0; index < 20; index++) {
+    if (refsArr != []) {
+      refsArr.push(useRef());
     }
-  console.log('refsarr',refsArr)
+  }
+  console.log("refsarr", refsArr);
   // const viewRefs = useRefs(2);
-  console.log('pets', pets.length);
+  console.log("pets", pets.length);
   // const [ref, view1, view2, view3, view4, view5, view6,view7, view8, view9, view10, view11, view12] = useRefs();
 
   useEffect(() => {
@@ -65,59 +57,64 @@ export default function PetSelection() {
       }
     };
     getPets();
-    
   }, []);
 
-
-    // // Populate refsArr with refs based on pets length
-    // if (pets.length > 0) {
-    //   for (let index = 0; index < pets.length; index++) {
-    //     refsArr.push(useRef());
-    //   }
-    // }
-
+  // // Populate refsArr with refs based on pets length
+  // if (pets.length > 0) {
+  //   for (let index = 0; index < pets.length; index++) {
+  //     refsArr.push(useRef());
+  //   }
+  // }
 
   return (
-    <div>
-    {pets.length !== 0 ? (<div ref={canvasRef} className="container">
-    <div className="text">
-      {pets.map((pet, index) => (
-        
-          <div key={index} className="card">
-            <h4>{pet.name}</h4>
-            <div ref={refsArr[index]} className="view translateX" />
+    <>
+      {pets.length !== 0 ? (
+        <div ref={canvasRef} className="container">
+          <div className="text">
+            {pets.map((pet, index) => (
+              
+              <div key={index} className="card">
+                <Link to={`/PetPage/${pet.id}`}><h4>Name: {pet.name}</h4></Link>
+                <div ref={refsArr[index]} className="view"/>
+                <h6>Species: {pet.species}</h6>
+                <h6>Breed: {pet.breed}</h6>
+                <h6>Age: {pet.age}</h6>
+                <h6>Description: {pet.description}</h6>
+                <h6>Adoption Status: {pet.adoption_status}</h6>
+
+              </div>
+             
+
+            ))}
           </div>
-      
-        
-      ))}
-      </div>
-      {/* <div className="card">          
+          {/* <div className="card">          
           <h4>pet Name</h4>
           <div ref={refsArr[1]} className="view translateX" />
         </div> */}
-      <Canvas ref={canvasRef} className="canvas" shadows={true}>
-      {/* <OrbitControls makeDefault /> */}
-        {/* <Perf position="bottom-right" /> */}
-        {pets.map((pet, index) => (
-          <View key={index} track={refsArr[index]}>
-            <Common color="lightblue" />
-            <ModelComponent
-              scale={pet.model_state.scale} 
-              position={pet.model_state.position} 
-              rotation={pet.model_state.rotation}
-              filePath={pet.model_filename}
-            />
-            <OrbitControls makeDefault />
-          </View>
-  ))}
-        {/* <Preload all /> */}
-      </Canvas>
-    </div>): (
+          <Canvas eventSource={canvasRef} className="canvas" shadows={true}>
+            {/* <OrbitControls makeDefault /> */}
+            {/* <Perf position="bottom-right" /> */}
+            {pets.map((pet, index) => (
+              <View key={index} track={refsArr[index]}>
+                <Common color="lightblue" />
+                <ModelComponent
+                  scale={pet.model_state.scale}
+                  position={pet.model_state.position}
+                  rotation={pet.model_state.rotation}
+                  filePath={pet.model_filename}
+                />
+                <OrbitControls makeDefault />
+              </View>
+            ))}
+            <Preload all />
+          </Canvas>
+        </div>
+      ) : (
         // Render when pets array is empty
         <div>No pets available.</div>
       )}
-    </div>
-  )
+    </>
+  );
 }
 
 const Common = ({ color }) => (

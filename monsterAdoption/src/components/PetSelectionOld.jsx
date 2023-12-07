@@ -105,7 +105,7 @@ export default function PetSelection() {
         
       </div>
       <Canvas eventSource={ref} className="canvas" shadows={true}>
-      <Perf position="top-left" />
+      {/* <Perf position="top-left" /> */}
         <View track={view1}>
           <Common color="lightblue" />
           <ModelComponent 
