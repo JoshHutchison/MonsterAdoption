@@ -45,7 +45,7 @@ const AdoptionApplications = () => {
         <div key={application.id} className="application-card">
           <h3>Application ID: {application.id}</h3>
           <div className="application-details">
-            <p><span className="key-value">User ID:</span>{application.user_id}</p>
+            {/* <p><span className="key-value">User ID:</span>{application.user_id}</p> */}
             <p><span className="key-value">Pet ID:</span>{application.pet_id}</p>
             <p><span className="key-value">Status:</span>{application.application_status}</p>
             <p><span className="key-value">Details:</span>{application.application_details}</p>

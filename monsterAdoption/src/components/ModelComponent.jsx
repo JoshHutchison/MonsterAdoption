@@ -8,14 +8,14 @@ export function ModelComponent({ filePath, ...props }) {
 
     const animations = useAnimations(model.animations, model.scene)
 
-    const defaultAnimationName = animations.names.length > 0 ? animations.names[0] : ''; // Set the first animation as default, change this logic as needed
+    const defaultAnimationName = animations.names.length > 0 ? animations.names[0] : ''; 
 
     let defaultRunAnimationName = defaultAnimationName;
 
     animations.names.some(name => {
       if (name.toLowerCase().includes('run')) {
         defaultRunAnimationName = name;
-        return true; // Stop looping when 'run' is found
+        return true; 
       }
       return false;
     });

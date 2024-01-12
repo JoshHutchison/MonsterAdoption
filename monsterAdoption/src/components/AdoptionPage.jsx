@@ -63,10 +63,10 @@ const AdoptionPage = () => {
   
     try {
       const response = await axios.post('http://localhost:8000/adoption-applications/', {
-        user_id: 3, // Replace userId with the actual user ID from your application
-        pet_id: id, // Assuming id is the pet's ID
-        application_status: 'Pending', // Set initial status as 'Pending' or change it as needed
-        application_details: 'New application', // Provide any details if needed
+        user_id: 3, 
+        pet_id: id, 
+        application_status: 'Pending', 
+        application_details: 'New application', 
         
         applicant_name: name,
         applicant_address: address,
@@ -76,12 +76,10 @@ const AdoptionPage = () => {
   
       console.log('Server response:', response.data);
       navigate('/AdoptionApplications');
-  
-      // Perform any additional actions after successful submission
-      // For example, show a success message, reset form fields, redirect, etc.
+ 
     } catch (error) {
       console.error('Error submitting data:', error);
-      // Handle errors, show error message to the user, etc.
+    
     }
   }
 
@@ -157,7 +155,7 @@ const AdoptionPage = () => {
         <p>Loading...</p>
       )}
       {/* Rest of your PetPage content */}
-      <Link to="/PetSelection">Go Back</Link>
+      {/* <Link to="/PetSelection">Go Back</Link> */}
     </div>
   );
 };
