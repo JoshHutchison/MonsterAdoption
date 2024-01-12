@@ -14,7 +14,7 @@ django-admin startapp ${1}
 
 psql -f settings.sql
 
-#add the database credentials to the settings file
+#add the database credentials to the settings file 
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
