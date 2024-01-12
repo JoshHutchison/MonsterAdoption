@@ -22,10 +22,6 @@
 ![Screenshot 2023-11-27 at 2 07 01 AM](https://github.com/JoshHutchison/project4/assets/47956394/edfaca8e-5c54-42e2-afbd-9caac0d17959)
 
 
-# Trello Board
-
-[Trello Board Link](https://trello.com/b/tMob462h/pet-adoption)
-
 # Project Scope
 
 The project aims to create a comprehensive pet adoption platform with an immersive experience using Three.js for pet visualization. Users can browse, search, and adopt pets from various shelters and rescues. It will include user authentication, pet listings with 3D visualization, adoption application submission, and management tools for shelters.
