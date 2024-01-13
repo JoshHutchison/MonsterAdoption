@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+import dj_database_url
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,17 +23,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-1_ew$b2hy3!!@^b=cs5@poqm0n(^se7u6+!xwsg5wc2kmoo2_9'
+# SECRET_KEY = 'django-insecure-1_ew$b2hy3!!@^b=cs5@poqm0n(^se7u6+!xwsg5wc2kmoo2_9'
+SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = 'RENDER' not in os.environ
 
 ALLOWED_HOSTS = []
 
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 # Application definition
 
 INSTALLED_APPS = [
+    # 'monster_api.apps.RenderConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -86,6 +94,19 @@ DATABASES = {
         'HOST': 'localhost'
     }
 }
+
+username = os.environ.get('USERNAME')
+password = os.environ.get('PASSWORD')
+
+
+DATABASES = {
+    'default': dj_database_url.config(
+        # Feel free to alter this value to suit your needs.
+        default='postgresql://' + username + ':' + password + '@dpg-cmgrp6mg1b2c73ab09k0-a/monsteradoptionpg',
+        conn_max_age=600
+    )
+}
+# postgres://monsteradoptionpg_user:YkUAIxjbWiwKF4TxBIMfXXXAbqtD938t@dpg-cmgrp6mg1b2c73ab09k0-a/monsteradoptionpg
 
 
 # Password validation
