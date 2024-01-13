@@ -2,6 +2,9 @@
 # exit on error
 set -o errexit
 
+ls
+
+pipenv shell
 pipenv install
 
 python manage.py collectstatic --no-input
